@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "declaration": true,
+        "outDir": "dist/",
+        "target": "es6",
+        "jsx": "react",
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
