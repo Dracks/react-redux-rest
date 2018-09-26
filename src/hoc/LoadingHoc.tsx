@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Response } from './Types';
+import { Response } from '../Types';
 
 type PropsType = {className?: string};
 

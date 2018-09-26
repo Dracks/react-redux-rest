@@ -1,4 +1,4 @@
-import { ReducerCallback, Action } from "./Types";
+import { ReducerCallback, Action } from "../Types";
 
 export default (actionType: string, reducer:ReducerCallback) => (state =[], action:Action) => {
     if (actionType === action.type) {

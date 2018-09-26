@@ -1,7 +1,7 @@
 import Rest from './Rest';
 
-import { ActionCallback, Action } from "./Types";
-import Actions, { fetchError } from "./Actions";
+import { ActionCallback, Action } from "../Types";
+import Actions, { fetchError } from "../Actions";
 
 const getActions = (actionsList: ActionCallback[], isLoading: boolean, data?: any) => {
     return actionsList.map(e=>{
@@ -20,7 +20,7 @@ export default (store: any) => (next:any) => (action: Action) => {
                 console.log(e);
                 store.dispatch(e)
             })
-        
+
         Rest.send(payload.url, payload.request)
             .then(payload.manageResponse)
             .then((data: any)=>{

@@ -1,4 +1,4 @@
-import { ObjectDataType } from "./Types";
+import { ObjectDataType } from "../Types";
 
 //export type RestBody
 

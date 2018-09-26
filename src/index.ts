@@ -1,11 +1,11 @@
-import fetchReducer from './FetchReducer';
-import fetchMiddleware from './FetchMiddleware';
-import withLoading from './LoadingHoc';
-import reducerForData from './ReducerForData';
-import MultiPropsLoadingHOC from './MultiPropsLoadingHOC';
+import fetchReducer from './reducers/FetchReducer';
+import fetchMiddleware from './core/FetchMiddleware';
+import withLoading from './hoc/LoadingHoc';
+import reducerForData from './reducers/ReducerForData';
+import MultiPropsLoadingHOC from './hoc/MultiPropsLoadingHOC';
 
 export * from './Actions';
-export { extractData } from './LoadingHoc';
+export { extractData } from './hoc/LoadingHoc';
 
 export {
     fetchMiddleware,

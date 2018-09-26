@@ -1,4 +1,4 @@
-import { Action } from "./Types";
+import { Action } from "../Types";
 
 export default (actionType: string, lambda?: (e:any)=>any, extra?:(e:any)=>any) => (state=null, action: Action) => {
     if (action.type === actionType){
