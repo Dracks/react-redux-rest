@@ -3,7 +3,7 @@ import { Response } from '../Types';
 
 type PropsType = {className?: string};
 
-export default function withLoading<T extends PropsType, L extends PropsType>(WrappedComponent: React.ComponentType<T>, Loading: React.ComponentType<L> , dataName: keyof T, initialize: keyof T) {
+export default function withLoading<T extends PropsType, L extends PropsType>(WrappedComponent: React.ComponentType<T>, Loading: React.ComponentType<L> , dataName: keyof T, initialize?: keyof T) {
     return  (props:T)=> {
         var data :Response = props[dataName] as any;
         if (data){
