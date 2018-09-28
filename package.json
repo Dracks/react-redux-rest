@@ -1,11 +1,11 @@
 {
-  "name": "react-redux-rest",
-  "version": "1.0.0",
+  "name": "js-redux-rest",
+  "version": "0.1.0",
   "description": "It's a library to add redux compatibility with redux",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
-    "url": "https://github.com/Dracks/react-redux-rest"
+    "url": "https://github.com/Dracks/redux-rest"
   },
   "scripts": {
     "build": "tsc",
@@ -14,7 +14,6 @@
     "test:watch": "yarn run jest --config=.jest.json --watch"
   },
   "keywords": [
-    "react",
     "redux",
     "rest"
   ],
