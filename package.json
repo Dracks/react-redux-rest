@@ -4,6 +4,12 @@
   "description": "It's a library to add redux compatibility with redux",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "**"
+  ],
+  "directories": {
+    "lib": "dist/"
+  },
   "repository": {
     "url": "https://github.com/Dracks/react-redux-rest"
   },
