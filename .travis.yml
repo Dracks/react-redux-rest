@@ -1,6 +1,6 @@
-language: node
+language: node_js
 
-node:
+node_js:
     - "8"
 
 cache:
@@ -20,3 +20,4 @@ deploy:
   provider: npm
   email: "mail@jaumesingla.es"
   api_key: "$NPM_TOKEN"
+  skip_cleanup: true
