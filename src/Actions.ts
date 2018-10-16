@@ -1,4 +1,4 @@
-import { ActionCallback, ActionCall, ResponseTypesActions, ObjectDataType, Action } from "./Types";
+import { ActionCallback, ActionCall, ResponseTypesActions, ObjectDataType, ActionGenerator } from "./Types";
 
 const ACTIONS = {
     FETCH: "0-network",
@@ -23,9 +23,9 @@ const manageResponse = (response: Response)=> {
     }
 }
 
-export const whenComplete = (callback:ActionCall):ActionCallback => (isLoading, data) =>{
+export const whenComplete = (callback:any) => (isLoading:boolean, data:any) => {
     if (!isLoading && data){
-        return callback()
+        return callback
     }
 }
 
@@ -47,7 +47,7 @@ export const responseAction = (action:string):ActionCallback=>{
         return {
             type: action,
             payload: {
-                isLoading: isLoading, 
+                isLoading: isLoading,
                 data: data,
                 reload: false,
             }
@@ -55,24 +55,12 @@ export const responseAction = (action:string):ActionCallback=>{
     }
 }
 
-export const fetchAction = (url:string, action: ResponseTypeCompatibility, request: any =null)=>{
-    var actions_list = action;
-    if (!Array.isArray(actions_list)){
-        actions_list = [(action as ResponseTypesActions)];
-    }
-    actions_list = actions_list.map(e=>{
-        if (typeof e === "string"){
-            return responseAction(e)
-        } else {
-            return e;
-        }
-    })
-    
+export const fetchAction : ActionGenerator = (url, callback, request =null)=>{
     return {
         type: ACTIONS.FETCH,
         payload: {
             url: url,
-            actions_list: actions_list,
+            saga: callback,
             request,
             manageResponse,
         }

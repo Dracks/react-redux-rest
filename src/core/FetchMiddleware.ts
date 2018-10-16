@@ -15,17 +15,12 @@ const getActions = (actionsList: ActionCallback[], isLoading: boolean, data?: an
 export default (store: any) => (next:any) => (action: Action) => {
     if (action.type === Actions.FETCH){
         const payload = action.payload;
-        getActions(payload.actions_list, true)
-            .forEach((e)=>{
-                console.log(e);
-                store.dispatch(e)
-            })
+        payload.saga(true)
 
         Rest.send(payload.url, payload.request)
             .then(payload.manageResponse)
             .then((data: any)=>{
-                getActions(payload.actions_list, false, data)
-                    .forEach(store.dispatch)
+                payload.saga(false, data)
             },
             (error: any) => {
                 store.dispatch(fetchError({
