@@ -1,4 +1,4 @@
-import { ActionCallback, ActionCall, ResponseTypesActions, ObjectDataType, ActionGenerator } from "./Types";
+import { ActionCallback, ResponseActionHelper, ResponseTypesActions, ObjectDataType, ActionGenerator, Action } from "./Types";
 
 const ACTIONS = {
     FETCH: "0-network",
@@ -6,8 +6,6 @@ const ACTIONS = {
 }
 
 export default ACTIONS
-
-type ResponseTypeCompatibility= ResponseTypesActions | ResponseTypesActions[]
 
 export const jsonHeaders = (): HeadersInit=>{
     var headers = new Headers();
@@ -29,7 +27,7 @@ export const whenComplete = (callback:any) => (isLoading:boolean, data:any) => {
     }
 }
 
-export const responseReloadAction = (action:string):ActionCallback => {
+export const responseReloadAction = (action:string):ResponseActionHelper<any> => {
     return (isLoading, data) => {
         return {
             type: action,
@@ -42,7 +40,7 @@ export const responseReloadAction = (action:string):ActionCallback => {
     }
 }
 
-export const responseAction = (action:string):ActionCallback=>{
+export const responseAction = (action:string):ResponseActionHelper<any>=>{
     return (isLoading, data)=>{
         return {
             type: action,
@@ -55,7 +53,7 @@ export const responseAction = (action:string):ActionCallback=>{
     }
 }
 
-export const fetchAction : ActionGenerator = (url, callback, request =null)=>{
+export const fetchAction : ActionGenerator = (url, callback, request =null):Action=>{
     return {
         type: ACTIONS.FETCH,
         payload: {
@@ -67,7 +65,7 @@ export const fetchAction : ActionGenerator = (url, callback, request =null)=>{
     }
 }
 
-export const saveAction = (url: string, action: ResponseTypeCompatibility, body: ObjectDataType)=>{
+export const saveAction = (url: string, action: ActionCallback, body: ObjectDataType)=>{
     var method = "POST"
     if (body.id){
         url = url.replace(":id", body.id);
@@ -82,7 +80,7 @@ export const saveAction = (url: string, action: ResponseTypeCompatibility, body:
     })
 }
 
-export const deleteAction = (url: string, action: ResponseTypeCompatibility, body: ObjectDataType)=>{
+export const deleteAction = (url: string, action: ActionCallback, body: ObjectDataType)=>{
     var method = "DELETE"
     url = url.replace(":id", body.id!);
     let actionObject =  fetchAction(url, action, {
@@ -99,7 +97,7 @@ export const fetchError = (data: any) => {
         payload: data
     }
 }
-
+/*
 export const compose = (action_name: string, action: ActionCallback, id?: number): ActionCallback => (isLoading, data)=>{
     return {
         type: action_name,
@@ -107,3 +105,4 @@ export const compose = (action_name: string, action: ActionCallback, id?: number
         id: id
     }
 }
+*/
