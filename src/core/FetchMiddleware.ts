@@ -1,18 +1,29 @@
+import { takeEvery, SagaIterator } from 'redux-saga'
+
 import Rest from './Rest';
-
-import { ActionCallback, Action } from "../Types";
+import { Action } from "../Types";
 import Actions, { fetchError } from "../Actions";
+import { call, put } from 'redux-saga/effects';
 
-const getActions = (actionsList: ActionCallback[], isLoading: boolean, data?: any) => {
-    return actionsList.map(e=>{
-        if (typeof e === "function"){
-            return e(isLoading, data);
-        }
-        return e;
-    }).filter(e=>e)
+export default function *saga(){
+    yield takeEvery(Actions.FETCH, fetchSaga)
 }
 
-export default (store: any) => (next:any) => (action: Action) => {
+function *fetchSaga({ payload }:Action):SagaIterator{
+    yield call(payload.saga, true)
+    try {
+        const response = yield call(Rest.send, payload.url, payload.request)
+        console.log(response);
+        const data = payload.manageResponse(response)
+        yield call(payload.saga, false, data)
+    } catch (error){
+        yield put(fetchError({
+            url: payload.url,
+            error
+        }))
+    }
+}
+export const middleware = (store: any) => (next:any) => (action: Action) => {
     if (action.type === Actions.FETCH){
         const payload = action.payload;
         payload.saga(true)

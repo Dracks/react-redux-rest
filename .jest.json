@@ -12,6 +12,10 @@
   "testMatch": [
     "**/*.test.(ts|tsx|js)"
   ],
+  "testPathIgnorePatterns":[
+    "/node_modules/",
+    "/lib/"
+  ],
   "preset": "ts-jest",
-  "setupFiles": ["<rootDir>/.jestSetup.ts"]
+  "setupFiles": ["<rootDir>/.jestSetup.js"]
 }

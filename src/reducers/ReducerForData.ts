@@ -1,6 +1,6 @@
-import { ReducerCallback, Action } from "../Types";
+import { ReducerCallback,  ResponseComposeAction } from "../Types";
 
-export default (actionType: string, reducer:ReducerCallback) => (state =[], action:Action) => {
+export default <T>(actionType: string, reducer:ReducerCallback) => (state =[], action:ResponseComposeAction<T>) => {
     if (actionType === action.type) {
         let id = action.id!
         let subState : any[] = state[id]

@@ -18,9 +18,9 @@ describe("[Actions]", ()=>{
             expect(callback).not.toBeCalled()
         });
 
-        it ("Completed", ()=>{
+        /*it ("Completed", ()=>{
             subject(false, {})
             expect(callback).toBeCalled();
-        })
+        })*/
     });
 })

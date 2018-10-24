@@ -1,4 +1,4 @@
-import { ActionCallback, ResponseActionHelper, ResponseTypesActions, ObjectDataType, ActionGenerator, Action } from "./Types";
+import { ActionCallback, ResponseActionHelper, ResponseAction, ObjectDataType, ActionGenerator, Action, ResponseComposeAction } from "./Types";
 
 const ACTIONS = {
     FETCH: "0-network",
@@ -97,12 +97,10 @@ export const fetchError = (data: any) => {
         payload: data
     }
 }
-/*
-export const compose = (action_name: string, action: ActionCallback, id?: number): ActionCallback => (isLoading, data)=>{
-    return {
-        type: action_name,
-        payload: action(isLoading, data),
-        id: id
-    }
-}
-*/
+
+export const compose = <T>(action_name: string, id: number) => (subAction: ResponseAction<T> | ResponseComposeAction<T>): ResponseComposeAction<T>=>({
+    type: action_name,
+    id,
+    payload: subAction
+
+})

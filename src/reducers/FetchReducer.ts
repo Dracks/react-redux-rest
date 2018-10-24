@@ -1,6 +1,6 @@
-import { Action } from "../Types";
+import { ResponseAction } from "../Types";
 
-export default (actionType: string, lambda?: (e:any)=>any, extra?:(e:any)=>any) => (state=null, action: Action) => {
+export default <T>(actionType: string, lambda?: (e:any)=>any, extra?:(e:any)=>any) => (state=null, action: ResponseAction<T>) => {
     if (action.type === actionType){
         var value = action.payload;
         if (!action.payload.reload || value.data){
