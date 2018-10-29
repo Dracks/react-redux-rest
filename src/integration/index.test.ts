@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, Store, combineReducers } from 'redux'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
 
-import fetchSaga from '../core/FetchMiddleware';
+import fetchSaga from '../saga';
 import { fetchAction, responseAction } from '../Actions';
 import { ActionCallback } from '../Types';
 import { call, put } from 'redux-saga/effects';
