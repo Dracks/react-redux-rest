@@ -5,7 +5,7 @@ const VENDOR_LIBS = require('./vendor_libs');
 
 module.exports = {
     entry:{
-        bundle: './src/index.tsx',
+        bundle: ["@babel/polyfill", './src/index.tsx'],
         vendor: VENDOR_LIBS,
     },
     resolve: {
@@ -28,49 +28,6 @@ module.exports = {
                 test: /\.(j|t)sx?$/,
                 exclude: /node_modules/
             },
-            /*{
-                test: /\.css$/,
-                use: [
-                  {
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                      // you can specify a publicPath here
-                      // by default it use publicPath in webpackOptions.output
-                      publicPath: '../'
-                    }
-                  },
-                  "css-loader"
-                ]
-            },*/
-           /*{
-                test: /\.html$/,
-                use: [
-                  {
-                    loader: "html-loader"
-                  }
-                ]
-            },
-            {
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 100000
-                    }
-                },
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 40000
-                        }
-                    },
-                    'image-webpack-loader'
-                ]
-            },*/
         ]
     },
     optimization: {

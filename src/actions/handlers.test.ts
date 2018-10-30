@@ -1,6 +1,6 @@
-import { whenComplete } from "./Actions";
+import { whenComplete } from "./handlers";
 
-describe("[Actions]", ()=>{
+describe("[handlers]", ()=>{
     describe("whenComplete", ()=>{
         let subject: any;
         let callback: any;

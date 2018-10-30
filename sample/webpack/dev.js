@@ -22,17 +22,10 @@ const config = {
     },
     plugins: [
         new webpack.DefinePlugin(getEnvVars()),
-       /* new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
-        }),*/
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            template: "webpack/index.html"
+        })
     ],
-    /*module: {
-        rules: [
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-        ]
-    },*/
     devtool: "source-map"
 };
 

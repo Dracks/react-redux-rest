@@ -2,14 +2,10 @@ import { createStore, applyMiddleware, Store, combineReducers } from 'redux'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
 
 import fetchSaga from '../saga';
-import { fetchAction, responseAction } from '../Actions';
+import { actions, responseActions } from '../actions';
 import { ActionCallback } from '../Types';
 import { call, put } from 'redux-saga/effects';
 import { fetchReducer } from '..';
-
-type StoreType = {
-    data:any;
-}
 
 const RESPONSE_ACTION = "response_action"
 
@@ -36,7 +32,7 @@ describe("[integration tests]", ()=>{
 
     it('Fetch some data request', ()=>{
         let callback:any = jest.fn()
-        store.dispatch(fetchAction("mockTest", callback))
+        store.dispatch(actions.fetch("mockTest", callback))
         expect(fetchMock).toHaveBeenCalled()
         expect(fetchMock).toHaveBeenCalledWith('mockTest', {"credentials": "same-origin"})
         expect(callback).toBeCalledWith(true);
@@ -44,7 +40,7 @@ describe("[integration tests]", ()=>{
 
     xit('Is calling the reducers', ()=>{
         let dataReceived: string=""
-        let response = responseAction(RESPONSE_ACTION);
+        let response = responseActions.normal(RESPONSE_ACTION);
         let callback: ActionCallback = function*(isLoading, data, error): SagaIterator{
             yield put(response(isLoading, data))
             console.log(isLoading, data);
@@ -53,7 +49,7 @@ describe("[integration tests]", ()=>{
             }
         }
         fetchMock.mockImplementationOnce(()=>Promise.resolve("Some data!"));
-        store.dispatch(fetchAction("mockTest2", callback))
+        store.dispatch(actions.fetch("mockTest2", callback))
         expect(dataReceived).toBe("Some data!");
         expect(store.getState()).toEqual({})
     })

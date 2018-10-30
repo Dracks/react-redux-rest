@@ -1,4 +1,4 @@
-import { ActionCallback, ResponseActionHelper, ResponseAction, ObjectDataType, ActionGenerator, Action, ResponseComposeAction } from "./Types";
+import { ActionCallback, ResponseActionHelper, ResponseAction, ObjectDataType, ActionGenerator, Action, ResponseComposeAction } from "../Types";
 
 const ACTIONS = {
     FETCH: "0-network",
@@ -18,38 +18,6 @@ const manageResponse = (response: Response)=> {
         return response.json()
     } else {
         return Promise.reject({code: response.status, description: response.statusText})
-    }
-}
-
-export const whenComplete = (callback:any) => (isLoading:boolean, data:any) => {
-    if (!isLoading && data){
-        return callback
-    }
-}
-
-export const responseReloadAction = (action:string):ResponseActionHelper<any> => {
-    return (isLoading, data) => {
-        return {
-            type: action,
-            payload: {
-                isLoading: isLoading,
-                reload: true,
-                data: data,
-            }
-        }
-    }
-}
-
-export const responseAction = (action:string):ResponseActionHelper<any>=>{
-    return (isLoading, data)=>{
-        return {
-            type: action,
-            payload: {
-                isLoading: isLoading,
-                data: data,
-                reload: false,
-            }
-        }
     }
 }
 
@@ -97,10 +65,3 @@ export const fetchError = (data: any) => {
         payload: data
     }
 }
-
-export const compose = <T>(action_name: string, id: number) => (subAction: ResponseAction<T> | ResponseComposeAction<T>): ResponseComposeAction<T>=>({
-    type: action_name,
-    id,
-    payload: subAction
-
-})

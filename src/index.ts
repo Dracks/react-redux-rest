@@ -1,13 +1,6 @@
-import fetchReducer from './reducers/FetchReducer';
-import { fetchMiddleware } from './core/FetchMiddleware';
-import fetchSaga from './saga';
-import reducerForData from './reducers/ReducerForData';
+export { default as fetchReducer } from './reducers/FetchReducer';
+export { fetchMiddleware } from './core/FetchMiddleware';
+export { default as fetchSaga} from './saga';
+export * from './reducers';
 
-export * from './Actions';
-
-export {
-    fetchMiddleware,
-    fetchReducer,
-    reducerForData,
-    fetchSaga
-}
+export * from './actions';

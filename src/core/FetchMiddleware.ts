@@ -1,6 +1,6 @@
 import Rest from './Rest';
 import { Action } from "../Types";
-import Actions, { fetchError } from "../Actions";
+import Actions, { fetchError } from "../actions/actions";
 
 
 export const fetchMiddleware = (store: any) => (next:any) => (action: Action) => {
