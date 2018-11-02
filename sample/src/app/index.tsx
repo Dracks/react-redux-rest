@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Debug } from './Debug';
 import { actions } from '../../../src';
-import { put } from 'redux-saga/effects';
 import { callback } from './Actions';
 import { Response } from '../../../src/Types';
 
