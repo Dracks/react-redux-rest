@@ -1,14 +1,15 @@
-import { fetchAction, saveAction, deleteAction } from './Actions';
+import { fetchAction, saveAction, deleteAction } from './actions';
 export const actions = {
     fetch: fetchAction,
     save: saveAction,
     delete: deleteAction,
 }
 
-import { whenComplete, compose } from './handlers';
+import { whenComplete, compose, saga } from './handlers';
 export const handlers = {
     whenComplete,
     compose,
+    saga
 }
 
 import { responseReloadAction, responseAction } from './response';

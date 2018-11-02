@@ -3,16 +3,12 @@ import { connect } from 'react-redux';
 import { Debug } from './Debug';
 import { actions } from '../../../src';
 import { put } from 'redux-saga/effects';
-import { response } from './Actions';
+import { callback } from './Actions';
 import { Response } from '../../../src/Types';
 
+const SAMPLE_URL = "https://api.nasa.gov/planetary/apod?api_key=7TTLAMNHFWUDqcRR1KrTYfZbLTa1YgM9AzDPq9c3";
 
-function* callback(isLoading:boolean, data:any){
-    console.log(isLoading, data);
-    yield put(response(isLoading, data))
-}
-
-const get = actions.fetch("https://api.nasa.gov/planetary/apod?api_key=7TTLAMNHFWUDqcRR1KrTYfZbLTa1YgM9AzDPq9c3", callback )
+const get = actions.fetch(SAMPLE_URL, callback )
 
 const Show=({isLoading, data, error}: Response)=>(
     <Debug {...{ isLoading, data: JSON.stringify(data), error }} />
@@ -33,10 +29,5 @@ const App = ({get, rest} : {get:any, rest:Response})=>{
 export default connect(
     ({rest}: any)=>({
         rest
-    }), (dispatch:any)=>({
-            get:()=>{
-                console.log("ping!");
-                dispatch(get)
-            }
-        })
+    }), {get:()=>get}
 )(App);

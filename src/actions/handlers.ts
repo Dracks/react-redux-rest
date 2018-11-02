@@ -1,4 +1,5 @@
-import { ResponseAction, ResponseComposeAction } from "../Types";
+import { put } from "redux-saga/effects";
+import { ResponseAction, ResponseComposeAction, ResponseActionHelper } from "../Types";
 
 export const whenComplete = (callback:any) => (isLoading:boolean, data:any) => {
     if (!isLoading && data){
@@ -12,3 +13,9 @@ export const compose = <T>(action_name: string, id: number) => (subAction: Respo
     payload: subAction
 
 })
+
+export const saga =  (responseHandler: ResponseActionHelper<any>)=> {
+    return function* s(isLoading:boolean, data:any){
+        yield put(responseHandler(isLoading, data))
+    }
+}
