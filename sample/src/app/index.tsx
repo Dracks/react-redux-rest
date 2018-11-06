@@ -5,7 +5,7 @@ import { actions } from '../../../src';
 import { callback } from './Actions';
 import { Response } from '../../../src/Types';
 
-const SAMPLE_URL = "https://api.nasa.gov/planetary/apod?api_key=7TTLAMNHFWUDqcRR1KrTYfZbLTa1YgM9AzDPq9c3";
+const SAMPLE_URL = "https://api.nasa.gov/planetary/apod?api_key=7TTLAMNHFWUDqcRR1KrTYfZbLTa1YgM9AzDPc3";
 
 const get = actions.fetch(SAMPLE_URL, callback )
 

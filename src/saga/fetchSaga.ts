@@ -1,9 +1,8 @@
 import { SagaIterator } from 'redux-saga'
-import { call, put } from 'redux-saga/effects';
+import { call } from 'redux-saga/effects';
 
 import { Action } from '../Types'
 import Rest from '../core/Rest';
-import { fetchError } from '../actions/actions';
 
 
 export function *fetchSaga({ payload }:Action):SagaIterator{
@@ -15,10 +14,6 @@ export function *fetchSaga({ payload }:Action):SagaIterator{
         })
         yield call(payload.saga, false, data)
     } catch (error){
-        //yield call(payload.saga, false, null, error)
-        yield put(fetchError({
-            url: payload.url,
-            error
-        }))
+        yield call(payload.saga, false, null, error)
     }
 }

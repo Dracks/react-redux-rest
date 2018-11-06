@@ -1,4 +1,4 @@
-import { whenComplete } from "./handlers";
+import { whenComplete, saga } from "./handlers";
 
 describe("[handlers]", ()=>{
     describe("whenComplete", ()=>{
@@ -11,16 +11,43 @@ describe("[handlers]", ()=>{
         });
 
         it ("No completed", ()=>{
-            subject(true, {});
-            expect(callback).not.toBeCalled();
+            expect(subject(true, {})).not.toBeTruthy();
 
-            subject(false, undefined);
-            expect(callback).not.toBeCalled()
+            expect(subject(false, undefined)).not.toBeTruthy()
         });
 
-        /*it ("Completed", ()=>{
-            subject(false, {})
-            expect(callback).toBeCalled();
-        })*/
+        it ("Completed", ()=>{
+            expect(subject(false, {})).toBeTruthy();
+        })
     });
+
+    describe("saga", ()=>{
+        let subject : (isLoading:boolean, data: any, error?: any)=>IterableIterator<any>;
+        let callback: jest.Mock;
+        beforeEach(()=>{
+            callback = jest.fn()
+            subject = saga(callback)
+        });
+
+        it ("Is loading", ()=>{
+            callback.mockReturnValue({daleks:"5"})
+            const generator = subject(true, null)
+            expect(generator.next().value.PUT.action).toEqual({daleks:"5"})
+            expect(callback).toBeCalledWith(true, null, undefined);
+        })
+
+        it ("Is loading", ()=>{
+            callback.mockReturnValue({daleks:"6"})
+            const generator = subject(false, {some:"data"})
+            expect(generator.next().value.PUT.action).toEqual({daleks:"6"})
+            expect(callback).toBeCalledWith(false, {some:"data"}, undefined);
+        })
+
+        it ("Is loading", ()=>{
+            callback.mockReturnValue({daleks:"-1"})
+            const generator = subject(false, {some:"data"}, "error")
+            expect(generator.next().value.PUT.action).toEqual({daleks:"-1"})
+            expect(callback).toBeCalledWith(false, {some:"data"}, "error");
+        })
+    })
 })

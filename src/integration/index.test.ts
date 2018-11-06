@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, Store, combineReducers } from 'redux'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
 
 import fetchSaga from '../saga';
-import { actions, responseActions } from '../actions';
+import { actions, responseAction } from '../actions';
 import { ActionCallback } from '../Types';
 import { call, put } from 'redux-saga/effects';
 import { fetchReducer } from '..';
@@ -40,7 +40,7 @@ describe("[integration tests]", ()=>{
 
     xit('Is calling the reducers', ()=>{
         let dataReceived: string=""
-        let response = responseActions.normal(RESPONSE_ACTION);
+        let response = responseAction(RESPONSE_ACTION);
         let callback: ActionCallback = function*(isLoading, data, error): SagaIterator{
             yield put(response(isLoading, data))
             console.log(isLoading, data);

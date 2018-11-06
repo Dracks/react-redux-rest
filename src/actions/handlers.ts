@@ -15,7 +15,7 @@ export const compose = <T>(action_name: string, id: number) => (subAction: Respo
 })
 
 export const saga =  (responseHandler: ResponseActionHelper<any>)=> {
-    return function* s(isLoading:boolean, data:any){
-        yield put(responseHandler(isLoading, data))
+    return function* s(isLoading:boolean, data:any, error?: any){
+        yield put(responseHandler(isLoading, data, error))
     }
 }

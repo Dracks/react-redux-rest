@@ -12,8 +12,4 @@ export const handlers = {
     saga
 }
 
-import { responseReloadAction, responseAction } from './response';
-export const responseActions = {
-    reload: responseReloadAction,
-    normal: responseAction
-}
+export { responseAction } from './response';

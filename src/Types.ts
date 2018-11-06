@@ -38,4 +38,4 @@ export type ResponseComposeAction<T> = {
     id: number,
     payload: ResponseAction<T> | ResponseComposeAction<T>
 }
-export type ResponseActionHelper<T> = (isLoading:boolean, data:T) => ResponseAction<T>
+export type ResponseActionHelper<T> = (isLoading:boolean, data:T, error?:any) => ResponseAction<T>
