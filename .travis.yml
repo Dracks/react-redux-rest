@@ -12,7 +12,6 @@ install:
   - npm install
 
 before_script:
-  - cat package.json
   - npm test
 
 script:
