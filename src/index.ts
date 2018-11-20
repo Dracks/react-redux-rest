@@ -5,6 +5,10 @@ import reducerForData from './reducers/ReducerForData';
 export * from './Actions';
 
 export {
+    NetworkResponse
+} from './Types'
+
+export {
     fetchMiddleware,
     fetchReducer,
     reducerForData,
