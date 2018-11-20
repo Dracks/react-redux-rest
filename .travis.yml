@@ -8,6 +8,7 @@ cache:
     - "node_modules"
 
 install:
+  - 'if [ ! -z $TRAVIS_TAG ]; then sed -i "/version/c\   \"version\" : \"${TRAVIS_TAG}\"," package.json; fi'
   - npm install
 
 before_script:
@@ -21,3 +22,5 @@ deploy:
   email: "mail@jaumesingla.es"
   api_key: "$NPM_TOKEN"
   skip_cleanup: true
+  on:
+    tags: true

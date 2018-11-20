@@ -12,3 +12,8 @@ export type ActionCall = ()=>Action
 export type ReducerCallback = <T>(state:T, action:{type:string})=>T;
 export type ActionCallback = (isLoading: boolean, data: any)=> Action | undefined;
 export type ResponseTypesActions= string | ActionCallback
+
+export type NetworkResponse<T> = {
+    isLoading: boolean
+    data: T
+}
