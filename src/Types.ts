@@ -7,13 +7,13 @@ export type Response = {
 
 export type ObjectDataType= {id?:string}
 
-export type Action = {type: string, id?: number, payload:any}
-export type ActionCall = ()=>Action
-export type ReducerCallback = <T>(state:T, action:{type:string})=>T;
-export type ActionCallback = (isLoading: boolean, data: any)=> Action | undefined;
-export type ResponseTypesActions= string | ActionCallback
-
 export type NetworkResponse<T> = {
     isLoading: boolean
     data: T
 }
+
+export type Action = {type: string, id?: number, payload:any}
+export type ActionCall = ()=>Action
+export type ReducerCallback<T> = (state:NetworkResponse<T> | undefined | null, action:Action)=>NetworkResponse<T>|null;
+export type ActionCallback = (isLoading: boolean, data: any)=> Action | undefined;
+export type ResponseTypesActions= string | ActionCallback

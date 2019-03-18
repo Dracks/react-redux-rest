@@ -1,11 +1,11 @@
-import { Action } from "../Types";
+import { Action, ReducerCallback, NetworkResponse } from "../Types";
 
-export default (actionType: string, lambda?: (e:any)=>any, extra?:(e:any)=>any) => (state=null, action: Action) => {
+const fetchReducer = <T, E>(actionType: string, lambda?: (e:NetworkResponse<T>, v?:NetworkResponse<E> | null)=>NetworkResponse<E>, extra?:(e:any)=>any): ReducerCallback<E> => (state=null, action: Action) => {
     if (action.type === actionType){
         var value = action.payload;
         if (!action.payload.reload || value.data){
             if (lambda){
-                value = lambda(value);
+                value = lambda(value, state);
             }
             let r = Object.assign({}, state, value);
             return r;
@@ -16,3 +16,5 @@ export default (actionType: string, lambda?: (e:any)=>any, extra?:(e:any)=>any) 
     }
     return state;
 }
+
+export default fetchReducer
