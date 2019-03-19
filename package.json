@@ -1,6 +1,6 @@
 {
   "name": "redux-api-rest",
-  "version": "1.2.0-alpha",
+  "version": "1.2.0",
   "description": "It's a library to add redux compatibility with redux",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
