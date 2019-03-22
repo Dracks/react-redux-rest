@@ -10,6 +10,8 @@ export type ObjectDataType= {id?:string}
 export type NetworkResponse<T> = {
     isLoading: boolean
     data: T
+    reload?: boolean
+    error?: any
 }
 
 export type Action = {type: string, id?: number, payload:any}
