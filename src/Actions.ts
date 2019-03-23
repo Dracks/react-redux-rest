@@ -30,26 +30,26 @@ export const whenComplete = (callback:ActionCall):ActionCallback => (isLoading, 
 }
 
 export const responseReloadAction = (action:string):ActionCallback => {
-    return (isLoading, data) => {
+    return (meta, data, error) => {
         return {
             type: action,
             payload: {
-                isLoading: isLoading,
-                reload: true,
-                data: data,
+                meta: {...meta, reload: true},
+                data,
+                error,
             }
         }
     }
 }
 
 export const responseAction = (action:string):ActionCallback=>{
-    return (isLoading, data)=>{
+    return (meta, data, error)=>{
         return {
             type: action,
             payload: {
-                isLoading: isLoading, 
-                data: data,
-                reload: false,
+                meta: {...meta, reload:false},
+                data,
+                error,
             }
         }
     }

@@ -1,12 +1,12 @@
 import Rest from './Rest';
 
-import { ActionCallback, Action } from "../Types";
+import { ActionCallback, Action, MetaData } from "../Types";
 import Actions, { fetchError } from "../Actions";
 
-const getActions = (actionsList: ActionCallback[], isLoading: boolean, data?: any) => {
+const getActions = (actionsList: ActionCallback[], meta: MetaData, data?: any, error?: any) => {
     return actionsList.map(e=>{
         if (typeof e === "function"){
-            return e(isLoading, data);
+            return e(meta, data, error);
         }
         return e;
     }).filter(e=>e)
@@ -15,16 +15,19 @@ const getActions = (actionsList: ActionCallback[], isLoading: boolean, data?: an
 export default (store: any) => (next:any) => (action: Action) => {
     if (action.type === Actions.FETCH){
         const payload = action.payload;
-        getActions(payload.actions_list, true)
+        const getMeta = (isLoading: boolean): MetaData=>({
+            url: payload.url,
+            isLoading
+        })
+        getActions(payload.actions_list, getMeta(true))
             .forEach((e)=>{
-                console.log(e);
                 store.dispatch(e)
             })
 
         Rest.send(payload.url, payload.request)
             .then(payload.manageResponse)
             .then((data: any)=>{
-                getActions(payload.actions_list, false, data)
+                getActions(payload.actions_list, getMeta(false), data)
                     .forEach(store.dispatch)
             },
             (error: any) => {
@@ -32,6 +35,8 @@ export default (store: any) => (next:any) => (action: Action) => {
                     url: payload.url,
                     error: error
                 }))
+                getActions(payload.actions_list, getMeta(false), null, error)
+                    .forEach(store.dispatch)
             }
         )
     } else {

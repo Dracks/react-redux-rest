@@ -5,7 +5,8 @@ import reducerForData from './reducers/ReducerForData';
 export * from './Actions';
 
 export {
-    NetworkResponse
+    NetworkResponse,
+    MetaData
 } from './Types'
 
 export {

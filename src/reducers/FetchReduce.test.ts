@@ -15,7 +15,8 @@ describe("[FetchReducerMerge]", ()=>{
     const buildResponse = (data: Array<TestObject>)=>({
         type: ActionTest,
         payload: {
-            data
+            data,
+            meta: {}
         }
     })
 
@@ -104,7 +105,7 @@ describe("[FetchReducerMerge]", ()=>{
                 buildObject(2, 5),
             ])
     
-            const result = subject({data: [buildObject(3, 5)], isLoading:false}, data)
+            const result = subject({data: [buildObject(3, 5)], meta: { isLoading:false, url:""}}, data)
             
             expect(result).toBeTruthy()
             expect(result!.data).toEqual([
