@@ -1,4 +1,4 @@
-import { ActionCallback, ActionCall, ResponseTypesActions, ObjectDataType, Action } from "./Types";
+import { ActionCallback, ActionCall, ResponseTypesActions, ObjectDataType, Action, MetaData } from "./Types";
 
 const ACTIONS = {
     FETCH: "0-network",
@@ -23,8 +23,8 @@ const manageResponse = (response: Response)=> {
     }
 }
 
-export const whenComplete = (callback:ActionCall):ActionCallback => (isLoading, data) =>{
-    if (!isLoading && data){
+export const whenComplete = (callback:ActionCall):ActionCallback => (meta:MetaData, data) =>{
+    if (!meta.isLoading && data){
         return callback()
     }
 }
